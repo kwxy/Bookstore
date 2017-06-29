@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html layout:decorator="main">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Title</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <form th:action="@{/signUpForm}" th:object="${client}" method="post">
+                <input type="text" th:field="*{name}">Imię: </input>
+                <input type="text" th:field="*{surname}">Nazwisko: </input>
+                <input type="text" th:field="*{street}">Ulica: </input>
+                <input type="text" th:field="*{city}">Miejscowość: </input>
+                <input type="text" th:field="*{postCode}">Kod pocztowy: </input>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </body>
+</html>
