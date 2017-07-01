@@ -9,7 +9,6 @@ import com.kwxy.bookstore.database.Book;
 import com.kwxy.bookstore.database.BookCategory;
 import com.kwxy.bookstore.repositories.BookCategoryDAO;
 import com.kwxy.bookstore.repositories.BookDAO;
-import java.math.BigDecimal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,14 +31,14 @@ public class BookService {
     }
     
     public List<Book> getBooksByCategoryId(Integer id){
-        return bookDAO.findByCategoryId(id);
+        return bookDAO.findByCategoryId(bookCategoryDAO.findById(id)); 
     }
     
     public List<Book> getAllBooks(){
         return bookDAO.findAll();
     }
     
-    public Book getBooksById(Integer id){
+    public Book getBookById(Integer id){
         return bookDAO.findById(id);
     }
     
@@ -47,4 +46,7 @@ public class BookService {
         return bookCategoryDAO.findById(id);
     }
     
+    public int getFirstBookCategoryId(){
+        return bookCategoryDAO.findAll().get(0).getId();
+    }
 }
