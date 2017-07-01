@@ -29,15 +29,6 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "client")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Client.findAll", query = "SELECT c FROM Client c")
-    , @NamedQuery(name = "Client.findById", query = "SELECT c FROM Client c WHERE c.id = :id")
-    , @NamedQuery(name = "Client.findByName", query = "SELECT c FROM Client c WHERE c.name = :name")
-    , @NamedQuery(name = "Client.findBySurname", query = "SELECT c FROM Client c WHERE c.surname = :surname")
-    , @NamedQuery(name = "Client.findByStreet", query = "SELECT c FROM Client c WHERE c.street = :street")
-    , @NamedQuery(name = "Client.findByCity", query = "SELECT c FROM Client c WHERE c.city = :city")
-    , @NamedQuery(name = "Client.findByPostCode", query = "SELECT c FROM Client c WHERE c.postCode = :postCode")})
 public class Client implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -77,12 +68,7 @@ public class Client implements Serializable {
     public Client() {
     }
 
-    public Client(Integer id) {
-        this.id = id;
-    }
-
-    public Client(Integer id, String name, String surname, String street, String city, String postCode) {
-        this.id = id;
+    public Client(String name, String surname, String street, String city, String postCode) {
         this.name = name;
         this.surname = surname;
         this.street = street;

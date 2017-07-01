@@ -14,11 +14,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -26,11 +23,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "cart_position")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "CartPosition.findAll", query = "SELECT c FROM CartPosition c")
-    , @NamedQuery(name = "CartPosition.findById", query = "SELECT c FROM CartPosition c WHERE c.id = :id")
-    , @NamedQuery(name = "CartPosition.findByQuantity", query = "SELECT c FROM CartPosition c WHERE c.quantity = :quantity")})
 public class CartPosition implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -53,12 +45,9 @@ public class CartPosition implements Serializable {
     public CartPosition() {
     }
 
-    public CartPosition(Integer id) {
-        this.id = id;
-    }
-
-    public CartPosition(Integer id, int quantity) {
-        this.id = id;
+    public CartPosition(int quantity, Cart cartId, Book bookId) {
+        this.cartId = cartId; 
+        this.bookId = bookId;
         this.quantity = quantity;
     }
 

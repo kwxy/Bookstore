@@ -17,13 +17,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
@@ -32,13 +29,6 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "book")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Book.findAll", query = "SELECT b FROM Book b")
-    , @NamedQuery(name = "Book.findById", query = "SELECT b FROM Book b WHERE b.id = :id")
-    , @NamedQuery(name = "Book.findByTitle", query = "SELECT b FROM Book b WHERE b.title = :title")
-    , @NamedQuery(name = "Book.findByPrice", query = "SELECT b FROM Book b WHERE b.price = :price")
-    , @NamedQuery(name = "Book.findByQuantity", query = "SELECT b FROM Book b WHERE b.quantity = :quantity")})
 public class Book implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -70,12 +60,8 @@ public class Book implements Serializable {
     public Book() {
     }
 
-    public Book(Integer id) {
-        this.id = id;
-    }
-
-    public Book(Integer id, String title, BigDecimal price, int quantity) {
-        this.id = id;
+    public Book(BookCategory categoryId, String title, BigDecimal price, int quantity) {
+        this.categoryId = categoryId;
         this.title = title;
         this.price = price;
         this.quantity = quantity;
