@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html layout:decorator="main">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Koszyk</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="container row">
+                <div th:each="cartPosition,iter : ${cartPositions}">
+                    <h3 th:text="|Tytuł: ${cartPosition.bookId.title}|"></h3>
+                    <p th:text="|Ilość: ${cartPosition.quantity}|"></p>
+                    <p id="positionPrice" th:text="|Wartość pozycji: ${(cartPosition.quantity)*(cartPosition.bookId.price)}|"></p>
+                    <a class="btn btn-primary" th:href="@{cart/deleteCartPosition/{currentCartPositionId}(currentCartPositionId=${iter.index})}">Usuń pozycję </a>
+                </div>
+                <p th:text="${cartPrice}"/>
+                <a class="btn btn-primary" th:href="@{cart/confirmOrder}">Zatwierdź </a>
+            </div>
+        </div>
+    </body>
+</html>
