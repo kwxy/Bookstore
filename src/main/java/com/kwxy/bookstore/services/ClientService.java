@@ -27,6 +27,6 @@ public class ClientService {
     }
     
     public Client getCurrentClient(){
-        return clientDAO.findById(12); //it will be change later... 
+        return clientDAO.findById(12); //it will be changed later... 
     }
 }
