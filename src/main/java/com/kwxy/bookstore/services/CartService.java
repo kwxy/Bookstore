@@ -48,20 +48,23 @@ public class CartService {
     }
     
     public List<CartPosition> getCartPositions(){
-        return cartPositionDAO.findAll(); 
+        return cartPositions;
     }
     
     public void saveCart(){
-        cartDAO.save(cart);
         cart.setCartPositionCollection(cartPositions);
+        cartDAO.save(cart);
     }
     
     public void confirmOrder(){
-        //change books quantity in database; 
+        //change books quantity in database will be added later.. 
         saveCart(); 
     }
     
     public void deleteCartPosition(int cartPositionId){
+        CartPosition cartPositionToRemove = cartPositions.get(cartPositionId);
+        // cartPrice - ( bookPrice * quantity ) 
+        cart.setCartPrice(cart.getCartPrice().subtract((cartPositionToRemove.getBookId().getPrice()).multiply(new BigDecimal(cartPositionToRemove.getQuantity()))));
         cartPositions.remove(cartPositionId);
     }
     
