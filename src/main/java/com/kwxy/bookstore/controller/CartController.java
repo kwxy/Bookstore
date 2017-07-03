@@ -34,7 +34,7 @@ public class CartController {
     CartService cartService; 
     
     @RequestMapping(value="/addProduct/{currentBookId}")
-    public String SecondaddProduct(@PathVariable("currentBookId") int bookId){
+    public String addProduct(@PathVariable("currentBookId") int bookId){
         Book currentBook = bookService.getBookById(bookId);
         Client currentClient = clientService.getCurrentClient();
         cartService.addProduct(currentBook, currentClient); 
@@ -44,7 +44,7 @@ public class CartController {
     @RequestMapping(value="/cart")
     public String showCart(Model model){
         model.addAttribute("cartPositions", cartService.getCartPositions()); 
-        model.addAttribute("cart", cartService.getCartPrice());
+        model.addAttribute("cartPrice", cartService.getCartPrice());
         return "/cart";
     }
     
@@ -58,5 +58,17 @@ public class CartController {
     public String confirm(){
         cartService.confirmOrder(); 
         return "redirect:/"; 
+    }
+    
+    @RequestMapping("cartPosition/subtractBook/{currentCartPositionId}")
+    public String decreaseBookQuantityInCart(@PathVariable("currentCartPositionId") int currentCartPositionId){
+        cartService.decreaseBookQuantityInCart(currentCartPositionId);
+        return "redirect:/cart";
+    }
+    
+    @RequestMapping("cartPosition/addBook/{currentCartPositionId}")
+    public String increaseBookQuantityInCart(@PathVariable("currentCartPositionId") int currentCartPositionId){
+        cartService.increaseBookQuantityInCart(currentCartPositionId);
+        return "redirect:/cart";
     }
 }

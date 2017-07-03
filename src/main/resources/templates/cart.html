@@ -9,7 +9,13 @@
             <div class="container row">
                 <div th:each="cartPosition,iter : ${cartPositions}">
                     <h3 th:text="|Tytuł: ${cartPosition.bookId.title}|"></h3>
-                    <p th:text="|Ilość: ${cartPosition.quantity}|"></p>
+                    <p th:text="|Ilość: ${cartPosition.quantity}|"/>
+                    <a th:href="@{cartPosition/addBook/{currentCartPositionId}(currentCartPositionId=${iter.index})}">
+                        <span class="glyphicons glyphicons-plus-sign"></span>dodaj
+                    </a>
+                    <a th:href="@{cartPosition/subtractBook/{currentCartPositionId}(currentCartPositionId=${iter.index})}">
+                        <span class="glyphicons glyphicons-minus-sign"></span>odejmij
+                    </a>
                     <p id="positionPrice" th:text="|Wartość pozycji: ${(cartPosition.quantity)*(cartPosition.bookId.price)}|"></p>
                     <a class="btn btn-primary" th:href="@{cart/deleteCartPosition/{currentCartPositionId}(currentCartPositionId=${iter.index})}">Usuń pozycję </a>
                 </div>
