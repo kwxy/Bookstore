@@ -25,7 +25,7 @@ public class UserController {
     ClientService clientService; 
     
     @RequestMapping(value="/signUpForm")
-    public String signUpForm(){
+    public String signUpForm(Client client){
         return "/signUpForm"; 
     }
     
@@ -35,13 +35,13 @@ public class UserController {
             return "redirect:/";
     }
     
-    @RequestMapping("/logIn")
-    public String logInForm(){
-        return "logIn";
+    @RequestMapping("/logInForm")
+    public String logIn(){
+        return "logInForm";
     }
     
-    @RequestMapping(value="/logIn", method=RequestMethod.POST)
-    public String logIn(){
+    @RequestMapping(value="/logInForm", method=RequestMethod.POST)
+    public String addUser(){
         return "index";
     }
     

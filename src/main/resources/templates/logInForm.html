@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html layout:decorator="main">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Logowanie</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="container">
+                <form role="form" th:action="@{logInForm}" method="post">
+                    <!--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
+                    <div>
+                        <label for="email">Email</label>
+                        <input type="email" name="email" id="email" required="true" autofocus="true"/>
+                    </div>
+                    <div>
+                        <label for="password">Hasło</label>
+                        <input type="password" name="password" id="password" required="true"/>
+                    </div>
+                    <button class="btn btn-primary" type="submit">Zaloguj</button>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

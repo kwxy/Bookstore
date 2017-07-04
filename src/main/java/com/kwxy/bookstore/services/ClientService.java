@@ -22,11 +22,14 @@ public class ClientService {
     @Autowired
     ClientDAO clientDAO; 
     
+    @Autowired
+    UserDetailsServiceImpl currentClient; 
+    
     public void addNewClient(Client client){
         clientDAO.save(client);
     }
     
     public Client getCurrentClient(){
-        return clientDAO.findById(12); //it will be changed later... 
+        return currentClient.getCurrentUser();
     }
 }

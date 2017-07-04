@@ -15,7 +15,7 @@
                         <div class="col-md-2">
                             <h2 th:text="${book.title}"></h2>
                             <p class="price" th:text="|Cena: ${book.price}zł|"/>
-                            <button class="btn btn-primary" type="button">Dodaj</button>
+                            <a class="btn btn-primary" th:href="@{/addProduct/{currentBook}(currentBook=${book.id})}">Dodaj</a>
                         </div>
                     </div>
                 </div>

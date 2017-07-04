@@ -74,18 +74,17 @@ public class CartPosition implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (bookId != null ? bookId.hashCode() : 0); //change it later... 
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof CartPosition)) {
             return false;
         }
         CartPosition other = (CartPosition) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.bookId == null && other.bookId != null) || (this.bookId != null && !this.bookId.equals(other.bookId))) { //change it later..
             return false;
         }
         return true;
