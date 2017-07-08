@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" 
       xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org/">
+      xmlns:th="http://www.thymeleaf.org/"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
     <head>
         <meta charset="UTF-8"/>
         <title>Title</title>
@@ -31,10 +32,18 @@
                     </button>
                 </div>
                 <div id="navcol-1" class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a th:href="@{signUpForm}"><span class="glyphicon glyphicon-user"></span> Rejestracja</a></li>
-                        <li><a th:href="@{cart}"><span class="glyphicon glyphicon-log-in"></span> Koszyk</a></li>
-                    </ul>
+                    <div sec:authorize="isAnonymous()">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a th:href="@{signUpForm}"><span class="glyphicon glyphicon-user"></span> Rejestracja</a></li>
+                            <li><a th:href="@{logInForm}"><span class="glyphicon glyphicon-log-in"></span> Zaloguj</a></li>
+                        </ul>    
+                    </div>
+                    <div sec:authorize="isAuthenticated()">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a th:href="@{cart}"><span class="glyphicon glyphicon-shopping-cart"></span> Koszyk</a></li>"
+                            <li><a th:href="@{clearCart}"><span class="glyphicon glyphicon-log-out"></span> Wyloguj</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </nav>

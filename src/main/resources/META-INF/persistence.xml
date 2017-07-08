@@ -7,7 +7,6 @@
     <class>com.kwxy.bookstore.database.CartPosition</class>
     <class>com.kwxy.bookstore.database.Book</class>
     <class>com.kwxy.bookstore.database.BookCategory</class>
-    <class>com.kwxy.bookstore.database.Order</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/bookstore?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

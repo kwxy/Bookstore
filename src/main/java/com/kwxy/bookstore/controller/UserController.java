@@ -6,6 +6,7 @@
 package com.kwxy.bookstore.controller;
 
 import com.kwxy.bookstore.database.Client;
+import com.kwxy.bookstore.services.CartService;
 import com.kwxy.bookstore.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,9 @@ public class UserController {
     
     @Autowired
     ClientService clientService; 
+    
+    @Autowired
+    CartService cartService; 
     
     @RequestMapping(value="/signUpForm")
     public String signUpForm(Client client){
@@ -45,8 +49,9 @@ public class UserController {
         return "index";
     }
     
-    @RequestMapping(value="/logOut")
-    public String logOut(){
-        return "index";
+    @RequestMapping(value="/clearCart")
+    public String clearCart(){
+        cartService.clearCart(); 
+        return "redirect:/logout";
     }
 }

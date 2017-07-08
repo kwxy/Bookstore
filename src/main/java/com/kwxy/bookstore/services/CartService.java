@@ -65,6 +65,7 @@ public class CartService {
     public void confirmOrder() {
         //change books quantity in database will be added later.. 
         saveCart();
+        clearCart();
     }
 
     public void deleteCartPosition(int cartPositionId) {
@@ -100,5 +101,13 @@ public class CartService {
         CartPosition currentCart = cartPositions.get(cartPosition);
         currentCart.setQuantity(currentCart.getQuantity() + 1);
         addCartPrice(currentCart.getBookId().getPrice());
+    }
+    
+//    public BigDecimal getCurrentCartPrice(){
+//    }
+    
+    public void clearCart(){
+        cartPositions.clear();
+        cart=null;
     }
 }

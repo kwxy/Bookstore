@@ -46,8 +46,6 @@ public class Cart implements Serializable {
     @JoinColumn(name = "client_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Client clientId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cartId")
-    private Collection<Order> order1Collection;
 
     public Cart() {
     }
@@ -80,15 +78,6 @@ public class Cart implements Serializable {
 
     public Client getClientId() {
         return clientId;
-    }
-
-    @XmlTransient
-    public Collection<Order> getOrder1Collection() {
-        return order1Collection;
-    }
-
-    public void setOrder1Collection(Collection<Order> order1Collection) {
-        this.order1Collection = order1Collection;
     }
 
     @Override
