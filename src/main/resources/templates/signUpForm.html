@@ -8,14 +8,37 @@
         <div layout:fragment="content">
             <div class="container">
                 <form th:action="@{/signUpForm}" th:object="${client}" method="post">
-                    <input type="text" th:field="*{name}">Imię: </input>
-                    <input type="text" th:field="*{surname}">Nazwisko: </input>
-                    <input type="text" th:field="*{street}">Ulica: </input>
-                    <input type="text" th:field="*{city}">Miejscowość: </input>
-                    <input type="text" th:field="*{postCode}">Kod pocztowy: </input>
-                    <input type="email" th:field="*{email}">Email: </input>
-                    <input type="password" th:field="*{password}">Hasło: </input>
-                    <button class="btn btn-primary" type="submit">Submit</button>
+                    <div>
+                        <label for="name">Imię</label>
+                        <input type="name" id="name" name="name" th:field="*{name}" required="true"></input>
+                    </div>
+                    <div>
+                        <label for="surname">Nazwisko:</label>
+                        <input type="text" id="surname" th:field="*{surname}" required="true"></input>
+                    </div>
+                    <div>
+                        <label for="street">Ulica:</label>
+                        <input type="text" id="street" th:field="*{street}" required="true"></input>
+                    </div>
+                    <div>
+                        <label for="city">Miejscowość:</label>
+                        <input type="text" id="city" th:field="*{city}" required="true"></input>
+                    </div>
+                    <div>
+                        <label for="postCode">Kod pocztowy:</label>
+                        <input type="text" id="postCode" path="postCode" th:field="*{postCode}" required="true"></input>
+                        <p th:if="${#fields.hasErrors('postCode')}" th:errors="*{postCode}" class="alert alert-danger"/>
+                    </div>
+                    <div>
+                        <label for="email">Email: </label>
+                        <input type="email" id="email" th:field="*{email}" required="true"></input>
+                    </div>
+                    <div>
+                        <label for="password">Hasło</label>
+                        <input type="password" id="name" th:field="*{password}" required="true"></input>
+                        <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="alert alert-danger"/>
+                    </div>
+                    <button class="btn btn-primary" type="submit">Potwierdź</button>
                 </form>
             </div>
         </div>

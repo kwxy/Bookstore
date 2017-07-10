@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
  * @author Monika
  */
 @Service
-public class CartService {
+public class CartService{
 
     @Autowired
     CartDAO cartDAO;
@@ -34,80 +34,80 @@ public class CartService {
     private CartPosition cartPosition;
     private List<CartPosition> cartPositions = new ArrayList();
 
-    public Cart createCart(Client client) {
+    public Cart createCart(Client client){
         cart = new Cart(new BigDecimal(0), client);
         return cart;
     }
 
-    public void addProduct(Book book, Client client) {
-        if (cart == null) {
+    public void addProduct(Book book, Client client){
+        if (cart == null){
             createCart(client);
         }
         book.setQuantity(book.getQuantity() - 1);
         cartPosition = new CartPosition(1, cart, book);
-        if (cartPositions.contains(cartPosition)) {
+        if (cartPositions.contains(cartPosition)){
             increaseBookQuantityInCart(cartPositions.indexOf(cartPosition));
-        } else {
+        } else{
             cartPositions.add(cartPosition);
             addCartPrice(book.getPrice());
         }
     }
 
-    public List<CartPosition> getCartPositions() {
+    public List<CartPosition> getCartPositions(){
         return cartPositions;
     }
 
-    public void saveCart() {
+    public void saveCart(){
         cart.setCartPositionCollection(cartPositions);
         cartDAO.save(cart);
     }
 
-    public void confirmOrder() {
+    public void confirmOrder(){
         //change books quantity in database will be added later.. 
         saveCart();
         clearCart();
     }
 
-    public void deleteCartPosition(int cartPositionId) {
+    public void deleteCartPosition(int cartPositionId){
         CartPosition cartPositionToRemove = cartPositions.get(cartPositionId);
         substractCartPrice(cartPositionToRemove.getBookId().getPrice(), cartPositionToRemove.getQuantity());
         cartPositions.remove(cartPositionId);
     }
 
-    public BigDecimal getCartPrice() {
+    public BigDecimal getCartPrice(){
         return cart.getCartPrice();
     }
 
-    public void addCartPrice(BigDecimal price) {
+    public void addCartPrice(BigDecimal price){
         cart.setCartPrice(cart.getCartPrice().add(price));
     }
 
-    public void substractCartPrice(BigDecimal price, int quantity) {
+    public void substractCartPrice(BigDecimal price, int quantity){
         // cartPrice - ( bookPrice * quantity ) 
         cart.setCartPrice(cart.getCartPrice().subtract(price.multiply(new BigDecimal(quantity))));
     }
 
-    public void decreaseBookQuantityInCart(int cartPosition) {
+    public void decreaseBookQuantityInCart(int cartPosition){
         CartPosition currentCart = cartPositions.get(cartPosition);
         currentCart.setQuantity(currentCart.getQuantity() - 1);
         int quantity = currentCart.getQuantity();
         substractCartPrice(currentCart.getBookId().getPrice(), 1);
-        if (quantity == 0) {
+        if (quantity == 0){
             deleteCartPosition(cartPosition);
         }
     }
 
-    public void increaseBookQuantityInCart(int cartPosition) {
+    public void increaseBookQuantityInCart(int cartPosition){
         CartPosition currentCart = cartPositions.get(cartPosition);
         currentCart.setQuantity(currentCart.getQuantity() + 1);
         addCartPrice(currentCart.getBookId().getPrice());
     }
-    
+
 //    public BigDecimal getCurrentCartPrice(){
 //    }
     
     public void clearCart(){
         cartPositions.clear();
-        cart=null;
+        cart = null;
     }
 }

@@ -8,8 +8,10 @@ package com.kwxy.bookstore.controller;
 import com.kwxy.bookstore.database.Client;
 import com.kwxy.bookstore.services.CartService;
 import com.kwxy.bookstore.services.ClientService;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,40 +20,43 @@ import org.springframework.web.bind.annotation.RequestMethod;
  *
  * @author Monika
  */
-
 @Controller
-public class UserController {
-    
+public class UserController{
+
     @Autowired
-    ClientService clientService; 
-    
+    ClientService clientService;
+
     @Autowired
-    CartService cartService; 
-    
-    @RequestMapping(value="/signUpForm")
+    CartService cartService;
+
+    @RequestMapping(value = "/signUpForm")
     public String signUpForm(Client client){
-        return "/signUpForm"; 
+        return "/signUpForm";
     }
-    
+
     @RequestMapping(value = "/signUpForm", method = RequestMethod.POST)
-    public String signUp(@ModelAttribute("client") Client client){
+    public String signUp(@Valid @ModelAttribute("client") Client client, BindingResult result) throws Exception{
+        if (result.hasErrors()){
+            System.out.println(result.getFieldErrors());
+            return "/signUpForm";
+        }
         clientService.addNewClient(client);
-            return "redirect:/";
+        return "redirect:/";
     }
-    
+
     @RequestMapping("/logInForm")
     public String logIn(){
         return "logInForm";
     }
-    
-    @RequestMapping(value="/logInForm", method=RequestMethod.POST)
+
+    @RequestMapping(value = "/logInForm", method = RequestMethod.POST)
     public String addUser(){
-        return "index";
+        return "redirect:/";
     }
-    
-    @RequestMapping(value="/clearCart")
+
+    @RequestMapping(value = "/clearCart")
     public String clearCart(){
-        cartService.clearCart(); 
+        cartService.clearCart();
         return "redirect:/logout";
     }
 }

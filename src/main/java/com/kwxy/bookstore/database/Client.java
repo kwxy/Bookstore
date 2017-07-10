@@ -5,6 +5,7 @@
  */
 package com.kwxy.bookstore.database;
 
+import com.kwxy.bookstore.validators.PostcodePLFormat;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
@@ -56,7 +57,8 @@ public class Client implements Serializable {
     private String city;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 6, max = 6)
+    @Size(min = 6, max = 6, message = "Kod pocztowy ma 6 znaków. ")
+    @PostcodePLFormat
     @Column(name = "post_code")
     private String postCode;
     @Basic(optional = false)
@@ -65,7 +67,7 @@ public class Client implements Serializable {
     private String email;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 6)
+    @Size(min = 6, message = "Za krótkie haslo")
     @Column(name = "password")
     private String password;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "clientId")
