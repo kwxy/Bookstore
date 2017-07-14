@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "client")
-public class Client implements Serializable {
+public class Client implements Serializable{
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -37,22 +37,22 @@ public class Client implements Serializable {
     private Integer id;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 30)
+    @Size(max = 30)
     @Column(name = "name")
     private String name;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 30)
+    @Size(max = 30)
     @Column(name = "surname")
     private String surname;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 50)
+    @Size(max = 50)
     @Column(name = "street")
     private String street;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 50)
+    @Size(max = 50)
     @Column(name = "city")
     private String city;
     @Basic(optional = false)
@@ -63,7 +63,7 @@ public class Client implements Serializable {
     private String postCode;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
     @Basic(optional = false)
     @NotNull
@@ -73,110 +73,111 @@ public class Client implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "clientId")
     private Collection<Cart> cartCollection;
 
-    public Client() {
+    public Client(){
     }
 
-    public Client(String name, String surname, String street, String city, String postCode, String password) {
+    public Client(String name, String surname, String street, String city, String postCode, String email, String password){
         this.name = name;
         this.surname = surname;
         this.street = street;
         this.city = city;
         this.postCode = postCode;
+        this.email = email;
         this.password = password;
     }
-    
-    public String getEmail() {
+
+    public String getEmail(){
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(String email){
         this.email = email;
     }
 
-    public String getPassword() {
+    public String getPassword(){
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(String password){
         this.password = password;
     }
 
-    public Integer getId() {
+    public Integer getId(){
         return id;
     }
 
-    public String getName() {
+    public String getName(){
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(String name){
         this.name = name;
     }
 
-    public String getSurname() {
+    public String getSurname(){
         return surname;
     }
 
-    public void setSurname(String surname) {
+    public void setSurname(String surname){
         this.surname = surname;
     }
 
-    public String getStreet() {
+    public String getStreet(){
         return street;
     }
 
-    public void setStreet(String street) {
+    public void setStreet(String street){
         this.street = street;
     }
 
-    public String getCity() {
+    public String getCity(){
         return city;
     }
 
-    public void setCity(String city) {
+    public void setCity(String city){
         this.city = city;
     }
 
-    public String getPostCode() {
+    public String getPostCode(){
         return postCode;
     }
 
-    public void setPostCode(String postCode) {
+    public void setPostCode(String postCode){
         this.postCode = postCode;
     }
 
     @XmlTransient
-    public Collection<Cart> getCartCollection() {
+    public Collection<Cart> getCartCollection(){
         return cartCollection;
     }
 
-    public void setCartCollection(Collection<Cart> cartCollection) {
+    public void setCartCollection(Collection<Cart> cartCollection){
         this.cartCollection = cartCollection;
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode(){
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
+    public boolean equals(Object object){
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Client)) {
+        if (!(object instanceof Client)){
             return false;
         }
         Client other = (Client) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))){
             return false;
         }
         return true;
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         return "com.kwxy.bookstore.database.Client[ id=" + id + " ]";
     }
-    
+
 }

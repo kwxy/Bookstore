@@ -6,11 +6,7 @@
 package com.kwxy.bookstore.services;
 
 import com.kwxy.bookstore.database.Client;
-import java.util.Collection;
-import java.util.HashSet;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 /**
  *

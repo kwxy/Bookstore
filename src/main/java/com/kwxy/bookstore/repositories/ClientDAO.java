@@ -17,10 +17,10 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-public interface ClientDAO extends CrudRepository<Client, Integer> {
-    
-    Optional<Client> findOneByEmail(String email);
+public interface ClientDAO extends CrudRepository<Client, Integer>{
+
+    public Optional<Client> findOneByEmail(String email);
     public Client findById(Integer id);
     public Client findByEmail(String email);
-    
+
 }

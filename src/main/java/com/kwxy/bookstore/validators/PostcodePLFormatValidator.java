@@ -16,7 +16,7 @@ public class PostcodePLFormatValidator implements ConstraintValidator<PostcodePL
         if (value.isEmpty()){
             return false;
         }
-
+        
         boolean isValid;
 
         String postcodePLPattern = "^[0-9]{2}-[0-9]{3}$";

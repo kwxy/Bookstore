@@ -9,27 +9,33 @@ import com.kwxy.bookstore.database.Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.kwxy.bookstore.repositories.ClientDAO;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Monika
  */
-@Transactional
 @Service
-public class ClientService {
+public class ClientService{
 
     @Autowired
-    ClientDAO clientDAO; 
-    
+    public void setClientDAO(ClientDAO clientDAO){
+        this.clientDAO = clientDAO;
+    }
+
+    ClientDAO clientDAO;
+
     @Autowired
-    UserDetailsServiceImpl currentClient; 
-    
+    UserDetailsServiceImpl currentClient;
+
     public void addNewClient(Client client){
         clientDAO.save(client);
     }
-    
+
     public Client getCurrentClient(){
         return currentClient.getCurrentUser();
+    }
+
+    public boolean emailIsExist(String email){
+        return clientDAO.findOneByEmail(email).isPresent();
     }
 }
